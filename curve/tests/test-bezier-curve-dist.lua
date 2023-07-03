@@ -1,8 +1,9 @@
 local GLApp = require 'glapp'
-local vec3 = require 'vec3'
+local vec3 = require 'vec.vec3'
 local class = require 'ext.class'
-local gl = require 'ffi.OpenGL'
-local BezierCurve = require 'curve.bezier'
+local table = require 'ext.table'
+local gl = require 'gl'
+local BezierCurve = require 'math.curve.bezier'
 
 local function printf(...) 
     print(string.format(...)) 
@@ -26,7 +27,7 @@ for _,curve in ipairs(curves) do
         allCurveCpts:insert(cpt)
     end
 end
-GLApp{
+return class(GLApp, {
     vtxs = table():append(curves[1].controlPoints):append(curves[2].controlPoints), 
     draw = function(app)
         for i,curve in ipairs(curves) do
@@ -77,4 +78,4 @@ GLApp{
             print('total area of separation',sum)
         end
     end,
-}()
+})()

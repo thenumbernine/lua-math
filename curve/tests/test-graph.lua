@@ -41,4 +41,4 @@ plots:insert{f=gaussChebyshevApprox}
 --]=]
 --]]
 
-Graph{plots=plots, gridSize=vec3(10, 10, 10)}()
+return Graph{plots=plots, gridSize=vec3(10, 10, 10)}()

@@ -1,8 +1,9 @@
+#!/usr/bin/env luajit
 local GLApp = require 'glapp'
-local vec3 = require 'vec3'
+local vec3 = require 'vec.vec3'
 local class = require 'ext.class'
-local gl = require 'ffi.OpenGL'
-local BezierCurve = require 'curve.bezier'
+local gl = require 'gl'
+local BezierCurve = require 'math.curve.bezier'
 
 local function printf(...) 
     print(string.format(...)) 
@@ -18,9 +19,9 @@ local controlPoints = {
 
 local curve = BezierCurve{controlPoints=controlPoints}
 
-GLApp{
+return class(GLApp, {
     vtxs = curve.controlPoints,
-    draw = function(self)
+    update = function(self)
         gl.glColor3f(1,0,0)
         gl.glBegin(gl.GL_POINTS)
         for _,cpt in ipairs(curve.controlPoints) do
@@ -47,4 +48,4 @@ GLApp{
         gl.glVertex3f(unpack(cpt))
         gl.glEnd()
     end,
-}()
+}):run()

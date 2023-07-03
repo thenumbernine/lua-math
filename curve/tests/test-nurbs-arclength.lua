@@ -22,5 +22,3 @@ local arclengthDetail = 1
 for _,func in ipairs{'arclengthEuler', 'arclengthChebyshev'} do
     print('nurbsCurve:'..func..'('..arclengthDetail..') = '..nurbsCurve[func](nurbsCurve, arclengthDetail))
 end
-
-

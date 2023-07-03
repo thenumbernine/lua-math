@@ -1,9 +1,10 @@
 local GLApp = require 'glapp'
-local vec3 = require 'vec3'
+local vec3 = require 'vec.vec3'
 local class = require 'ext.class'
-local gl = require 'ffi.OpenGL'
-local NURBSCurve = require 'curve.nurbs'
-local BezierCurve = require 'curve.bezier'
+local table = require 'ext.table'
+local gl = require 'gl'
+local NURBSCurve = require 'math.curve.nurbs'
+local BezierCurve = require 'math.curve.bezier'
 
 
 local curves = table()
@@ -142,7 +143,7 @@ if useList then
     list = gl.glGenLists(1)
     recompile = true
 end
-GLApp{
+return class(GLApp, {
     vtxs = allCurveCpts,
     init = function(app, ...)
         app.view.pos[3] = 1
@@ -182,5 +183,4 @@ GLApp{
             gl.glCallList(list)
         end
     end,
-}()
-
+})()
