@@ -1,8 +1,5 @@
 #!/usr/bin/env luajit
-local GLApp = require 'glapp'
-local vec3 = require 'vec.vec3'
-local class = require 'ext.class'
-local gl = require 'gl'
+local vec3d = require 'vec-ffi.vec3d'
 local BezierCurve = require 'math.curve.bezier'
 
 local function printf(...) 
@@ -16,16 +13,16 @@ local controlPoints = {
     vec3(0,1,0),
 }
 
-
 local curve = BezierCurve{controlPoints=controlPoints}
 
-return class(GLApp, {
+return require 'glapp.orbit'():subclass{
     vtxs = curve.controlPoints,
-    update = function(self)
-        gl.glColor3f(1,0,0)
+	update = function(self)
+        local gl = self.gl
+		gl.glColor3f(1,0,0)
         gl.glBegin(gl.GL_POINTS)
         for _,cpt in ipairs(curve.controlPoints) do
-            gl.glVertex3f(unpack(cpt))
+            gl.glVertex3f(cpt:unpack())
         end
         gl.glEnd()
         gl.glColor3f(0,1,1)
@@ -36,8 +33,11 @@ return class(GLApp, {
         end
         gl.glEnd() 
 
-        local viewZ = self.view.angle:rotate(vec3(0,0,1))
-        local mousept = self.view.pos + self.mouseRay * vec3.dot(curve.controlPoints[1] - self.view.pos, -viewZ) 
+        local viewZ = self.view.angle:rotate(vec3d(0,0,1))
+        local mousept = self.view.pos + self.mouseRay * vec3d.dot(
+			vec3d(curve.controlPoints[1]:unpack()) - self.view.pos,
+			-viewZ
+		)
         local cpt = curve:closestPoint(mousept)
         gl.glColor3f(0,1,0)
         gl.glBegin(gl.GL_POINTS)
@@ -48,4 +48,4 @@ return class(GLApp, {
         gl.glVertex3f(unpack(cpt))
         gl.glEnd()
     end,
-}):run()
+}():run()

@@ -8,6 +8,8 @@ U[n](x) = x * U[n-1](x) + T[n](x)
 derivative:
 T'[n](x) = n * U[n-1](x)
 --]]
+local table = require 'ext.table'
+
 local chebyshev = {}
 
 chebyshev.first = {

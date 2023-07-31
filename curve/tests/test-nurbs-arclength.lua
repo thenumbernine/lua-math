@@ -1,7 +1,8 @@
-local vec3 = require 'vec3'
+#!/usr/bin/env luajit
+local vec3 = require 'vec.vec3'
 local class = require 'ext.class'
-local gl = require 'ffi.OpenGL'
-local NURBSCurve = require 'curve.nurbs'
+local gl = require 'gl'
+local NURBSCurve = require 'math.curve.nurbs'
 
 local controlPoints = {
     vec3(0,0,0),

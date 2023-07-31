@@ -1,5 +1,6 @@
 local class = require 'ext.class'
-local vec3 = require 'vec3'
+local table = require 'ext.table'
+local vec3 = require 'vec.vec3'
 
 local NURBSCurve = class()
 
