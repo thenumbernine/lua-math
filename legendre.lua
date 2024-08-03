@@ -71,6 +71,9 @@ Ps:buildcode(1, x)
 
 setmetatable(Ps, {
 	__index = function(self,k)
+		-- invoke index operations ...
+		local tmp1 = self[k-2]
+		local tmp2 = self[k-1]
 		local expr = frac(2 * k - 1, k) * x * self.exprs[k-1] - frac(k - 1, k) * self.exprs[k-2]
 		return self:buildcode(k, expr())
 	end,
