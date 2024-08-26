@@ -1,3 +1,4 @@
+#!/usr/bin/env luajit
 local GLApp = require 'glapp'
 local vec3 = require 'vec.vec3'
 local class = require 'ext.class'
@@ -144,6 +145,7 @@ if useList then
     recompile = true
 end
 return class(GLApp, {
+    viewUseGLMatrixMode = true,
     vtxs = allCurveCpts,
     init = function(app, ...)
         app.view.pos[3] = 1

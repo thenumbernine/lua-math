@@ -1,4 +1,5 @@
 #!/usr/bin/env luajit
+local gl = require 'gl'
 local vec3d = require 'vec-ffi.vec3d'
 local BezierCurve = require 'math.curve.bezier'
 
@@ -16,9 +17,9 @@ local controlPoints = {
 local curve = BezierCurve{controlPoints=controlPoints}
 
 return require 'glapp.orbit'():subclass{
+    viewUseGLMatrixMode = true,
     vtxs = curve.controlPoints,
 	update = function(self)
-        local gl = self.gl
 		gl.glColor3f(1,0,0)
         gl.glBegin(gl.GL_POINTS)
         for _,cpt in ipairs(curve.controlPoints) do

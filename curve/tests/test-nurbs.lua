@@ -168,7 +168,8 @@ end
 debugline = table() 
 
 return class(GLApp, {
-    vtxs = allCurveCpts,
+    viewUseGLMatrixMode = true,
+	vtxs = allCurveCpts,
     init = function(app, ...)
         app.view.pos[3] = 1
         app.view.zNear = .1

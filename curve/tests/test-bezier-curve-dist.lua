@@ -1,3 +1,4 @@
+#!/usr/bin/env luajit
 local GLApp = require 'glapp'
 local vec3 = require 'vec.vec3'
 local class = require 'ext.class'
@@ -28,6 +29,7 @@ for _,curve in ipairs(curves) do
     end
 end
 return class(GLApp, {
+    viewUseGLMatrixMode = true,
     vtxs = table():append(curves[1].controlPoints):append(curves[2].controlPoints), 
     draw = function(app)
         for i,curve in ipairs(curves) do
