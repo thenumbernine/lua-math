@@ -16,7 +16,7 @@ local controlPoints = {
 
 local curve = BezierCurve{controlPoints=controlPoints}
 
-return require 'glapp.orbit'():subclass{
+return require 'app3d.orbit'():subclass{
     viewUseGLMatrixMode = true,
     vtxs = curve.controlPoints,
 	update = function(self)

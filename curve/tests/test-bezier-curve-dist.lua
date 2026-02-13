@@ -1,5 +1,5 @@
 #!/usr/bin/env luajit
-local GLApp = require 'glapp'
+local GLApp = require 'gl.app'
 local vec3 = require 'vec.vec3'
 local class = require 'ext.class'
 local table = require 'ext.table'
